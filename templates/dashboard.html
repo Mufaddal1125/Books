@@ -1,0 +1,72 @@
+{% extends "layout.html" %} {% block title %} {{ title }} {% endblock %} 
+{% block head %}
+<script src="{{ url_for('static',filename='index.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+{% endblock head %}
+{%block body %}
+
+<form
+  class="form-inline mt-3 mb-3"
+  method="get"
+  action="{{ url_for('search') }}"
+>
+  <div class="form-group">
+    <input
+      type="text"
+      name="isbn"
+      class="form-control mb-2 mr-sm-2"
+      placeholder="ISBN"
+      id=""
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      name="title"
+      class="form-control mb-2 mr-sm-2"
+      placeholder="Title"
+      id=""
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      name="author"
+      class="form-control mb-2 mr-sm-2"
+      placeholder="Author"
+      id=""
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      name="year"
+      class="form-control mb-2 mr-sm-2"
+      placeholder="Year"
+      id=""
+    />
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Search</button>
+</form>
+<a style="position: absolute; top: 13px; right: 15px;" class="btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
+<div class="table-striped table-inverse table-hover table-responsive">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books: %}
+      <form method="get" id='books' action="{{ url_for('bookreview') }}">
+        
+      </form>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

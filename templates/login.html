@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block body %}
+<h1>Login</h1>
+{% if msg: %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>{{ msg }} </strong> 
+  </div>
+  {% endif %}
+  <script>
+    $(".alert").alert();
+  </script>
+    <form method="post" action="{{ url_for('login') }}">
+            <div class="form-group">
+              <label for="name">Enter Name:</label>
+              <input type="text" class="form-control" name="name" id="" aria-describedby="helpId" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" name="password" id="" placeholder="Enter Password">
+              
+            </div>
+            <button class="btn btn-primary" role="button">Login</button>
+            <p>Not Registered  <a name="login" id="" href="{{ url_for('index')}}" role="button">Register Here</a></p>
+    </form>
+{% endblock %}

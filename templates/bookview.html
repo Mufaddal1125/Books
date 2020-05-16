@@ -1,0 +1,63 @@
+{% extends "layout.html" %} {% block title %} {{ title }} {% endblock %} {%
+block body %}
+
+<h1 style="text-align: center;" class="pb-5">Book Details</h1>
+<div class="d-flex bookreview">
+  <div class="flex-row bd-highlight mb-3">
+    <div class="p-2 bd-highlight">ISBN:</div>
+    <div class="p-2 bd-highlight">{{ book.isbn}}</div>
+  </div>
+  <div class="flex-row bd-highlight mb-3">
+    <div class="p-2 bd-highlight">Title:</div>
+    <div class="p-2 bd-highlight">{{ book.title}}</div>
+  </div>
+  <div class="flex-row bd-highlight mb-3">
+    <div class="p-2 bd-highlight">Author:</div>
+    <div class="p-2 bd-highlight">{{ book.author}}</div>
+  </div>
+  <div class="flex-row bd-highlight mb-3">
+    <div class="p-2 bd-highlight">Year:</div>
+    <div class="p-2 bd-highlight">{{ book.year}}</div>
+  </div>
+  <div class="flex-row bd-highlight mb-3">
+    <div class="p-2 bd-highlight">Average Rating:</div>
+    <div class="p-2 bd-highlight">{{ view.books[0].average_rating }}</div>
+  </div>
+  <div class="flex-row bd-highlight mb-3">
+    <div class="p-2 bd-highlight">Ratings Count:</div>
+    <div class="p-2 bd-highlight">{{ view.books[0].work_ratings_count }}</div>
+  </div>
+</div>
+<div>
+  <h1>User Reviews:</h1>
+  {% for review in review: %}
+  <div style="margin: 15px 10px; border: solid 1px black; padding: 15px 10px;  ">
+    <p>Rating: {{ review.rating}}</p>
+    <hr>
+    <p>Review: {{ review.text }}</p>
+  </div>
+
+  {% endfor%}
+</div>
+<form class="mt-5" method="post" action="{{ url_for('submitReview') }}">
+  <label>Rate The Book On Scale of 1 to 5:</label>
+  <div class="slidecontainer">
+    <input
+      type="range"
+      style="width: 100%;"
+      data-show-value="true"
+      name="rating"
+      min="1"
+      max="5"
+      value="3"
+      class="slider"
+      id="myRange"
+    />
+  </div>
+  <div class="form-group">
+    <label>Write Your Opinion About the Book:</label>
+    <textarea class="form-control" rows="7" name="text"></textarea>
+  </div>
+  <button class="btn btn-primary">Submit Review</button>
+</form>
+{% endblock %}

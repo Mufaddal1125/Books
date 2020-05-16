@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block body %}
+{% if msg: %}
+<div class="alert alert-primary" role="alert">
+  {{msg}}
+</div>
+<h1>{{ heading }}</h1>
+<p>{{ para }}</p>
+{% endif %}
+{% endblock %}
