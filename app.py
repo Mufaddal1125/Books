@@ -1,6 +1,6 @@
 import os, requests
 from models import *
-from flask import Flask, session, render_template, request, jsonify
+from flask import Flask, session, render_template, request, jsonify, redirect
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -49,18 +49,13 @@ def login():
     if users is None:
         return render_template("index.html", msg = "Error User Not Found")
     else: 
-        return render_template('dashboard.html')
+        return redirect('dashboard')
 
-@app.route("/dashboard", methods=["POST"])
+@app.route("/dashboard")
 def books():
-    if session.get("user"):
-        start = int(request.form.get('start') or 0)
-        end = int(request.form.get('end') or (start + 9))
-
-        book = {}
-        for i in range(start, end + 1):
-            book.append(Books.query.filter().limit(i).all())
-        return jsonify(book)
+    
+    book = Books.query.all()
+    return render_template('dashboard.html', books=book)
 
 @app.route("/logout")
 def logout():

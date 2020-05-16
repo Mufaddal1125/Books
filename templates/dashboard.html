@@ -1,9 +1,8 @@
-{% extends "layout.html" %} {% block title %} {{ title }} {% endblock %} 
-{% block head %}
+{% extends "layout.html" %} {% block title %} {{ title }} {% endblock %} {%
+block head %}
 <script src="{{ url_for('static',filename='index.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
-{% endblock head %}
-{%block body %}
+{% endblock head %} {%block body %}
 
 <form
   class="form-inline mt-3 mb-3"
@@ -48,7 +47,12 @@
   </div>
   <button type="submit" class="btn btn-primary mb-2">Search</button>
 </form>
-<a style="position: absolute; top: 13px; right: 15px;" class="btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
+<a
+  style="position: absolute; top: 13px; right: 15px;"
+  class="btn btn-primary"
+  href="{{ url_for('logout') }}"
+  >Logout</a
+>
 <div class="table-striped table-inverse table-hover table-responsive">
   <table class="table">
     <thead class="thead-dark">
@@ -62,8 +66,17 @@
     </thead>
     <tbody>
       {% for book in books: %}
-      <form method="get" id='books' action="{{ url_for('bookreview') }}">
-        
+      <form method="get" id="books" action="{{ url_for('bookreview') }}">
+        <input type="hidden" name="isbns" value="{{book.isbn}}" />
+        <tr>
+          <td>{{book.isbn}}</td>
+          <td>{{book.title}}</td>
+          <td>{{book.author}}</td>
+          <td>{{book.year}}</td>
+          <td>
+            <button type="submit" class="btn btn-primary mb-2">View</button>
+          </td>
+        </tr>
       </form>
       {% endfor %}
     </tbody>
